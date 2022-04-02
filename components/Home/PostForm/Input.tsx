@@ -1,5 +1,5 @@
 import React from "react"
-import classnames from "classnames"
+import classNames from "classnames"
 
 type InputProps = React.HTMLAttributes<HTMLInputElement> & {
   error?: boolean
@@ -11,7 +11,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <input
         {...props}
         ref={ref}
-        className={classnames(
+        className={classNames(
           "block",
           "h-[25px]",
           "w-full",
