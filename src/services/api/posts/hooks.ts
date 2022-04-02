@@ -1,15 +1,16 @@
 import { useQuery, useMutation } from "react-query"
 
-import { getPosts, addPost, editPost, deletePost } from "./requests"
+import { getPosts, addPost, editPost, deletePost, getPost } from "./requests"
 
-import type {
+import {
   GetPostsResponse,
   AddPostResponse,
   AddPostParams,
   EditPostParams,
   EditPostResponse,
   DeletePostResponse,
-  DeletePostParams
+  DeletePostParams,
+  GetPostResponse
 } from "./types"
 import type { Error } from "../helpers"
 import type { QueryClient } from "react-query"
@@ -20,6 +21,14 @@ export const usePosts = () =>
 
     return response.data
   })
+
+export const usePost = (id: string) => {
+  useQuery<GetPostResponse["data"], Error>(["post", id], async () => {
+    const response = await getPost({ id })
+
+    return response.data
+  })
+}
 
 export const useAddPost = (queryClient?: QueryClient) =>
   useMutation<AddPostResponse, Error, AddPostParams>(addPost, {

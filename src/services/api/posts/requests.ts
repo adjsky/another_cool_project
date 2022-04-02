@@ -4,6 +4,8 @@ import type {
   AddPostParams,
   AddPostResponse,
   GetPostsResponse,
+  GetPostParams,
+  GetPostResponse,
   EditPostParams,
   EditPostResponse,
   DeletePostParams,
@@ -17,6 +19,15 @@ export const addPost = async (
     url: "/api/posts/add",
     method: "POST",
     data
+  })
+}
+
+export const getPost = async ({
+  id
+}: GetPostParams): Promise<GetPostResponse> => {
+  return makeRequest({
+    url: `/api/posts/${id}`,
+    method: "GET"
   })
 }
 

@@ -20,6 +20,16 @@ export type GetPostsResponse = {
   message?: string
 }
 
+export type GetPostParams = {
+  id: string
+}
+
+export type GetPostResponse = {
+  status: number
+  data?: Post
+  message?: string
+}
+
 export type EditPostParams = Post
 
 export type EditPostResponse = {
