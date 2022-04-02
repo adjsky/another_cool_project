@@ -22,13 +22,12 @@ export const usePosts = () =>
     return response.data
   })
 
-export const usePost = (id: string) => {
+export const usePost = (id: string) =>
   useQuery<GetPostResponse["data"], Error>(["post", id], async () => {
     const response = await getPost({ id })
 
     return response.data
   })
-}
 
 export const useAddPost = (queryClient?: QueryClient) =>
   useMutation<AddPostResponse, Error, AddPostParams>(addPost, {
