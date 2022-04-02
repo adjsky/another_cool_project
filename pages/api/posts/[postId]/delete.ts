@@ -7,7 +7,7 @@ import {
 } from "@/src/services/backend/helpers"
 import database from "@/src/services/simpleDatabase"
 
-const addPost: NextApiHandler = (req, res) => {
+const deletePost: NextApiHandler = (req, res) => {
   if (!checkMethod(req, res, "DELETE")) {
     return
   }
@@ -39,4 +39,4 @@ const addPost: NextApiHandler = (req, res) => {
   }
 }
 
-export default addPost
+export default deletePost

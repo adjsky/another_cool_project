@@ -9,7 +9,7 @@ import database from "@/src/services/simpleDatabase"
 
 import { isPostWithoutId } from "@/src/services/simpleDatabase/models"
 
-const addPost: NextApiHandler = (req, res) => {
+const editPost: NextApiHandler = (req, res) => {
   if (!checkMethod(req, res, "PUT")) {
     return
   }
@@ -50,4 +50,4 @@ const addPost: NextApiHandler = (req, res) => {
   }
 }
 
-export default addPost
+export default editPost
