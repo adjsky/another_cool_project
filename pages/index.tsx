@@ -1,10 +1,14 @@
 import React from "react"
 
+import Posts from "@/components/Home/Posts"
+import PostForm from "@/components/Home/PostForm"
+
 const Home = () => {
   return (
-    <div className="flex w-full h-screen items-center justify-center bg-gray-900">
-      <h1 className="text-white tracking-widest text-5xl font-semibold">HI!</h1>
-    </div>
+    <main className="grid grid-cols-1 sm:grid-cols-2 justify-items-center items-center">
+      <Posts />
+      <PostForm />
+    </main>
   )
 }
 
