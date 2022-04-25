@@ -2,7 +2,7 @@ import { useQuery, useMutation } from "react-query"
 
 import { getPosts, addPost, editPost, deletePost, getPost } from "./requests"
 
-import {
+import type {
   GetPostsResponse,
   AddPostResponse,
   AddPostParams,

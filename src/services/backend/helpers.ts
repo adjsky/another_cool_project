@@ -39,9 +39,9 @@ export const handleError = <T>(
 /**
  * Check if request method equals to the provided one/ones and respond with an error message
  *
- * @param req
- * @param res
- * @param method
+ * @param req request object
+ * @param res response object
+ * @param method request method or methods
  */
 export const checkMethod = (
   req: NextApiRequest,
