@@ -3,34 +3,30 @@ import { useQuery, useMutation } from "react-query"
 import { getPosts, addPost, editPost, deletePost, getPost } from "./requests"
 
 import type {
-  GetPostsResponse,
-  AddPostResponse,
   AddPostParams,
   EditPostParams,
-  EditPostResponse,
-  DeletePostResponse,
   DeletePostParams,
-  GetPostResponse
+  Post
 } from "./types"
-import type { Error } from "../helpers"
+import type { Error, Response } from "../helpers"
 import type { QueryClient } from "react-query"
 
 export const usePosts = () =>
-  useQuery<GetPostsResponse["data"], Error>("posts", async () => {
+  useQuery<Post[], Error<string>>("posts", async () => {
     const response = await getPosts()
 
     return response.data
   })
 
 export const usePost = (id: string) =>
-  useQuery<GetPostResponse["data"], Error>(["post", id], async () => {
+  useQuery<Post, Error<string>>(["post", id], async () => {
     const response = await getPost({ id })
 
     return response.data
   })
 
 export const useAddPost = (queryClient?: QueryClient) =>
-  useMutation<AddPostResponse, Error, AddPostParams>(addPost, {
+  useMutation<Response<Post[]>, Error<string>, AddPostParams>(addPost, {
     onSuccess: () => {
       if (!queryClient) {
         return
@@ -41,7 +37,7 @@ export const useAddPost = (queryClient?: QueryClient) =>
   })
 
 export const useEditPost = () =>
-  useMutation<EditPostResponse, Error, EditPostParams>(editPost)
+  useMutation<Response<Post[]>, Error<string>, EditPostParams>(editPost)
 
 export const useDeletePost = () =>
-  useMutation<DeletePostResponse, Error, DeletePostParams>(deletePost)
+  useMutation<Response<Post[]>, Error<string>, DeletePostParams>(deletePost)

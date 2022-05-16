@@ -2,56 +2,44 @@ import { makeRequest } from "../helpers"
 
 import type {
   AddPostParams,
-  AddPostResponse,
-  GetPostsResponse,
   GetPostParams,
-  GetPostResponse,
   EditPostParams,
-  EditPostResponse,
   DeletePostParams,
-  DeletePostResponse
+  Post
 } from "./types"
 
-export const addPost = async (
-  data: AddPostParams
-): Promise<AddPostResponse> => {
-  return makeRequest({
+export const addPost = async (data: AddPostParams) => {
+  return makeRequest<Post[]>({
     url: "/api/posts/add",
     method: "POST",
     data
   })
 }
 
-export const getPost = async ({
-  id
-}: GetPostParams): Promise<GetPostResponse> => {
-  return makeRequest({
+export const getPost = async ({ id }: GetPostParams) => {
+  return makeRequest<Post>({
     url: `/api/posts/${id}`,
     method: "GET"
   })
 }
 
-export const getPosts = async (): Promise<GetPostsResponse> => {
-  return makeRequest({
+export const getPosts = async () => {
+  return makeRequest<Post[]>({
     url: "/api/posts",
     method: "GET"
   })
 }
 
-export const editPost = async (
-  data: EditPostParams
-): Promise<EditPostResponse> => {
-  return makeRequest({
+export const editPost = async (data: EditPostParams) => {
+  return makeRequest<Post[]>({
     url: `/api/posts/${data.id}}/edit`,
     method: "PUT",
     data
   })
 }
 
-export const deletePost = async ({
-  id
-}: DeletePostParams): Promise<DeletePostResponse> => {
-  return makeRequest({
+export const deletePost = async ({ id }: DeletePostParams) => {
+  return makeRequest<Post[]>({
     url: `/api/posts/${id}/delete`,
     method: "DELETE"
   })

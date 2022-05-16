@@ -2,37 +2,57 @@ import axios from "axios"
 
 import type { AxiosRequestConfig } from "axios"
 
-export type Response = {
+export type CancelledResponse = {
+  state: "cancelled"
+}
+
+export type UnavailableResponse = {
+  state: "unavailable"
+}
+
+export type FailedResponse<T> = {
+  state: "failed"
   status: number
-  data: any
+  message: T
 }
 
-export type Error = {
-  status?: number
-  message: any
+export type Error<T> =
+  | CancelledResponse
+  | UnavailableResponse
+  | FailedResponse<T>
+
+export type Response<T> = {
+  status: number
+  data: T
 }
 
-export const makeRequest = async (
+export const makeRequest = async <T>(
   props: AxiosRequestConfig
-): Promise<Response> => {
+): Promise<Response<T>> => {
   try {
-    const response = await axios({ ...props })
+    const response = await axios(props)
 
     return {
-      ...response.data
+      status: response.status,
+      data: response.data
     }
   } catch (error) {
-    const errorObject: Error = {
-      message: "Server is unavailable"
+    if (axios.isCancel(error)) {
+      throw {
+        state: "cancelled"
+      }
     }
 
     if (axios.isAxiosError(error) && error.response) {
-      const response = error.response
-
-      errorObject.message = response.data.message
-      errorObject.status = response.status
+      throw {
+        state: "failed",
+        status: error.response.status,
+        message: error.response.data.message
+      }
     }
 
-    throw errorObject
+    throw {
+      state: "unavailable"
+    }
   }
 }

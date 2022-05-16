@@ -8,42 +8,12 @@ export type Post = {
 
 export type AddPostParams = Omit<Post, "id">
 
-export type AddPostResponse = {
-  status: number
-  data?: Post[]
-  message?: string
-}
-
-export type GetPostsResponse = {
-  status: number
-  data?: Post[]
-  message?: string
-}
-
 export type GetPostParams = {
   id: string
 }
 
-export type GetPostResponse = {
-  status: number
-  data?: Post
-  message?: string
-}
-
 export type EditPostParams = Post
-
-export type EditPostResponse = {
-  status: number
-  data?: Post[]
-  message?: string
-}
 
 export type DeletePostParams = {
   id: string
-}
-
-export type DeletePostResponse = {
-  status: number
-  data?: Post[]
-  message?: string
 }
