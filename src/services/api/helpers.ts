@@ -34,7 +34,7 @@ export const makeRequest = async <T>(
 
     return {
       status: response.status,
-      data: response.data
+      data: response.data.data
     }
   } catch (error) {
     if (axios.isCancel(error)) {
